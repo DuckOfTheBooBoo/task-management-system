@@ -146,4 +146,4 @@ nodemon.json
 *eslint*
 diagrams/
 .env
-
+*.rest
