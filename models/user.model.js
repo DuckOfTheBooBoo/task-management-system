@@ -1,6 +1,5 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../database');
-const Task = require('./task.model');
 
 const User = sequelize.define('User', {
   username: {
@@ -16,7 +15,5 @@ const User = sequelize.define('User', {
     allowNull: false,
   },
 });
-
-User.hasMany(Task);
 
 module.exports = User;

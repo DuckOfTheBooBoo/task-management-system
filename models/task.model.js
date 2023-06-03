@@ -1,6 +1,5 @@
 const {DataTypes} = require('sequelize');
 const sequelize = require('../database');
-const User = require('./user.model');
 
 const Task = sequelize.define('Task', {
   task_desc: {
@@ -22,7 +21,5 @@ const Task = sequelize.define('Task', {
     defaultValue: 'Not Completed',
   },
 });
-
-Task.belongsTo(User);
 
 module.exports = Task;
