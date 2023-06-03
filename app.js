@@ -14,7 +14,8 @@ sequelize.authenticate()
       console.log('Connection to database has ben established.');
     })
     .catch((err) => {
-      console.error('Unable to connect/auth to database: ', err);
+      console.error('Unable to connect/auth to database: ', err.stack);
+      throw err;
     });
 
 app.get('/', (req, res) => {
