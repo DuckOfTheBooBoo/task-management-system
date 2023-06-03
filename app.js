@@ -1,14 +1,23 @@
 require('dotenv').config();
+require('./models/associations');
 const express = require('express');
 const sequelize = require('./database');
 const logActivity = require('./middlewares/log-activity');
-require('./models/associations');
+const path = require('path');
+const indexRoute = require('./routes/index.route');
+const apiRoute = require('./routes/api.route');
 
 const app = express();
 const host = process.env.STATUS !== 'prod' ? '127.0.0.1' : '0.0.0.0';
 const PORT = 8081;
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 app.use(logActivity);
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use('/', indexRoute);
+app.use('/api', apiRoute);
 
 sequelize.authenticate()
     .then(() => {
@@ -29,9 +38,6 @@ sequelize.sync()
       throw err;
     });
 
-app.get('/', (req, res) => {
-  res.status(200).send('Hello');
-});
 
 app.listen(PORT, host, () => {
   console.log(`Server is running on port ${host}:${PORT}`);
