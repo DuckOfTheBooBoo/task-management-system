@@ -63,7 +63,45 @@ const createTaskForUser = async (req, res) => {
 
 };
 
+const updateTaskForUser = async (req, res) => {
+  const userId = req.userId;
+  const {taskId, description, status} = req.body;
+
+  if (!taskId || !status || !description) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'taskId or status cannot be empty.',
+    });
+  }
+
+  try {
+    await Task.update({
+      description: description,
+      status: status,
+    },
+    {
+      where: {
+        'task_id': taskId,
+      },
+    });
+
+    return res.json({
+      status: 'success',
+      message: 'Task updated successfully',
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Server error',
+    });
+  }
+};
+
 module.exports = {
   getTaskForUser,
   createTaskForUser,
+  updateTaskForUser,
 };

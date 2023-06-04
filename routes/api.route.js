@@ -6,6 +6,7 @@ const verifyToken = require('../controllers/verifyToken.controller');
 const {
   getTaskForUser,
   createTaskForUser,
+  updateTaskForUser,
 } = require('../controllers/task.controller');
 const router = express.Router();
 
@@ -18,7 +19,7 @@ router.route('/task')
     .all(jwtAuthMiddleware)
     .get(getTaskForUser)
     .post(createTaskForUser)
-    .put()
+    .put(updateTaskForUser)
     .delete();
 
 module.exports = router;
