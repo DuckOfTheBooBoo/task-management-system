@@ -7,7 +7,11 @@ const router = express.Router();
 
 router.post('/auth/signup', registerUser);
 router.post('/auth/login', loginUser);
-
 router.post('/verifyToken', verifyToken);
+
+router.route('/task')
+    // TODO: Add controller later
+    .get(jwtAuthMiddleware)
+    .post(jwtAuthMiddleware);
 
 module.exports = router;
