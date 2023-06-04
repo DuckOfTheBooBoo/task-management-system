@@ -4,15 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Task Management System</title>
 </head>
 <body>
-    <form action="/api/auth/login" method="post">
+    <form action="/api/auth/login" id="login-form">
         Username:
-        <input type="text">
+        <input type="text" placeholder="altaf" name="username" required>
         Password:
-        <input type="password">
-        <input type="submit" value="Sign Up">
+        <input type="password" placeholder="altaf" name="password" required>
+        <input type="submit" value="Log In">
     </form>
+
+    <script>
+        const sumbmitForm = async (data) => {
+            try {
+                const response = await axios.post('/api/auth/login', data);
+                
+                if (response.statusText === 'OK') {
+                    const token = response.data.token;
+                    localStorage.setItem('jwtToken', token);
+
+                    alert('You are logged in!');
+
+                    window.location.href = '/api/protected';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        const loginForm = document.getElementById('login-form');
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = {};
+
+            for (const [key, val] of formData.entries()) {
+                data[key] = val;
+            }
+
+            sumbmitForm(data);
+        });
+    </script>
 </body>
 </html>
