@@ -10,33 +10,52 @@ const User = require('../models/user.model');
  */
 const registerUser = async (req, res, next) => {
 
-  const users = await User.findAll({
-    attributes: ['username'],
-  });
+  const {username, password} = req.body;
 
-  users.forEach((user) => {
-    const data = user.dataValues;
-    if (data.username === req.body.username) {
-      return res.status(400).json({
-        message: 'Username has been taken.',
-      });
-    }
-  });
+  if (!username || !password) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'username or password cannot be empty',
+    });
+  }
 
-  const hashedPass = await bcrypt.hash(
-      req.body.password,
-      10,
-  );
+  try {
 
-  await User.create({
-    username: req.body.username,
-    password: hashedPass,
-  });
+    const users = await User.findAll({
+      attributes: ['username'],
+    });
 
-  return res.status(200).json({
-    status: 'Success',
-    message: 'User successfully created.',
-  });
+    users.forEach((user) => {
+      const data = user.dataValues;
+      if (data.username === username) {
+        return res.status(400).json({
+          message: 'Username has been taken.',
+        });
+      }
+    });
+
+    const hashedPass = await bcrypt.hash(
+        password,
+        10,
+    );
+    await User.create({
+      username: username,
+      password: hashedPass,
+    });
+
+    return res.status(200).json({
+      status: 'Success',
+      message: 'User successfully created.',
+    });
+  } catch (err) {
+
+    console.error(err);
+
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Server error',
+    });
+  }
 
 };
 
