@@ -7,6 +7,7 @@ const {
   getTaskForUser,
   createTaskForUser,
   updateTaskForUser,
+  deleteTaskForUser,
 } = require('../controllers/task.controller');
 const router = express.Router();
 
@@ -20,6 +21,6 @@ router.route('/task')
     .get(getTaskForUser)
     .post(createTaskForUser)
     .put(updateTaskForUser)
-    .delete();
+    .delete(deleteTaskForUser);
 
 module.exports = router;

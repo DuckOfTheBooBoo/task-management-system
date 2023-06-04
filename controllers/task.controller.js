@@ -100,8 +100,44 @@ const updateTaskForUser = async (req, res) => {
   }
 };
 
+const deleteTaskForUser = async (req, res) => {
+
+  const userId = req.userId;
+  const {taskId} = req.body;
+
+  if (!taskId) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'taskId cannot be empty',
+    });
+  }
+
+  try {
+
+    await Task.destroy({
+      where: {
+        'task_id': taskId,
+      },
+    });
+
+    return res.json({
+      status: 'success',
+      message: 'Successfully deleted the task',
+    });
+  } catch (err) {
+    console.error(err);
+
+    return res.status(500).json({
+      status: 'fail',
+      message: 'Server error',
+    });
+  }
+
+};
+
 module.exports = {
   getTaskForUser,
   createTaskForUser,
   updateTaskForUser,
+  deleteTaskForUser,
 };
