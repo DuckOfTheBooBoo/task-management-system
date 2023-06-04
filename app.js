@@ -3,7 +3,6 @@ require('./models/associations');
 const express = require('express');
 const sequelize = require('./database');
 const logActivity = require('./middlewares/log-activity');
-const cookieParser = require('cookie-parser');
 const path = require('path');
 const indexRoute = require('./routes/index.route');
 const apiRoute = require('./routes/api.route');
@@ -30,7 +29,7 @@ sequelize.authenticate()
     });
 
 // Sequelize Sync
-sequelize.sync()
+sequelize.sync({force: true, alter: true})
     .then(() => {
       console.log('Database initialized successfully');
     })
