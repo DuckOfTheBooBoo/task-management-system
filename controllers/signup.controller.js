@@ -1,8 +1,6 @@
 /* eslint-disable valid-jsdoc */
 require('dotenv').config();
 const bcrypt = require('bcrypt');
-const passport = require('passport');
-const JWTStrategy = require('passport-jwt').Strategy;
 const User = require('../models/user.model');
 
 /**
@@ -36,7 +34,8 @@ const registerUser = async (req, res, next) => {
   });
 
   return res.status(200).json({
-    message: 'Success',
+    status: 'Success',
+    message: 'User successfully created.',
   });
 
 };
