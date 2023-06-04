@@ -33,12 +33,7 @@ const loginUser = async (req, res, next) => {
     const token = jwt.sign(
         {username: user.username},
         process.env.JWT_SECRET,
-        {expiresIn: '30m'});
-
-    // res.cookie('jwtToken', token, {
-    //   httpOnly: true,
-    //   secure: true,
-    // });
+        {expiresIn: '1m'});
 
     return res.json({
       status: 'success',

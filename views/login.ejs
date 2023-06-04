@@ -15,8 +15,32 @@
         <input type="password" placeholder="altaf" name="password" required>
         <input type="submit" value="Log In">
     </form>
-
+    
     <script>
+        // Check if client have jwtToken in localStorage
+        const verifyToken = async () => {
+            const jwtToken = localStorage.getItem('jwtToken');
+            console.log(jwtToken);
+            if (jwtToken) {
+                try {
+                    const response = await axios.post('/api/verifyToken', {}, {
+                        headers: {
+                            'Authorization': `Bearer ${jwtToken}`,
+                        }
+                    });
+
+                    if (response.statusText === 'OK') {
+                        window.location.href = '/';
+                    }
+                } catch (err) {
+                    {}
+                }
+            }
+            
+        }
+
+        verifyToken();
+
         const sumbmitForm = async (data) => {
             try {
                 const response = await axios.post('/api/auth/login', data);
@@ -27,10 +51,14 @@
 
                     alert('You are logged in!');
 
-                    window.location.href = '/api/protected';
+                    window.location.href = '/dashboard';
+                } else {
+                    console.log(response);
                 }
             } catch (err) {
-                console.error(err);
+                const responseData = err.response.data;
+
+                alert(responseData.message);
             }
         };
 
@@ -48,6 +76,7 @@
 
             sumbmitForm(data);
         });
+
     </script>
 </body>
 </html>
