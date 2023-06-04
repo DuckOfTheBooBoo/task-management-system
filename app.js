@@ -29,7 +29,7 @@ sequelize.authenticate()
     });
 
 // Sequelize Sync
-sequelize.sync({force: true, alter: true})
+sequelize.sync()
     .then(() => {
       console.log('Database initialized successfully');
     })

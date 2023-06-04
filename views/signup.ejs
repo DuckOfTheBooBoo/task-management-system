@@ -4,17 +4,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Task Management System</title>
 </head>
 <body>
-    <form action="/api/auth/signup" method="post">
+    <form action="/api/auth/signup" method="post" id="signup-form">
         Username:
-        <input type="text" value="altaf" name="username" required>
+        <input type="text" placeholder="altaf" name="username" required>
         Password:
-        <input type="password" value="123" name="password" required>
+        <input type="password" placeholder="123" name="password" required>
         <!-- Confirm Password:
         <input type="password"> -->
         <input type="submit" value="Sign Up">
     </form>
+
+    <script>
+        const sumbmitForm = async (data) => {
+            try {
+                const response = await axios.post('/api/auth/signup', data);
+                
+                if (response.statusText === 'OK') {
+
+                    alert('User created successfully');
+
+                    window.location.href = '/login';
+                } else {
+                    console.log(response);
+                }
+            } catch (err) {
+                const responseData = err.response.data;
+
+                alert(responseData.message);
+            }
+        };
+
+        const loginForm = document.getElementById('signup-form');
+
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const data = {};
+
+            for (const [key, val] of formData.entries()) {
+                data[key] = val;
+            }
+
+            sumbmitForm(data);
+        });
+    </script>
 </body>
 </html>
