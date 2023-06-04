@@ -8,7 +8,7 @@ const Task = sequelize.define('Task', {
     primaryKey: true,
     allowNull: false,
   },
-  task_desc: {
+  description: {
     type: DataTypes.STRING,
     allowNull: false,
   },

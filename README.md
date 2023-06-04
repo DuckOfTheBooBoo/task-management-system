@@ -77,12 +77,12 @@
     "message": "/?",
     "data": [
         {
-            "taskId": "(task_id)",
-            "userId": "(user_id)",
+            "task_id": "(task_id)",
             "description": "task description",
-            "dateCreated": "date of created",
-            "dateUpdated": "date of updated (nullable)",
-            "status": "Not Completed/Done"
+            "status": "Not Completed/Done",
+            "createdAt": "date of created",
+            "updatedAt": "date of updated",
+            "UserId": "(user_id)"
         }
     ]
 }

@@ -10,7 +10,6 @@ const getTaskForUser = async (req, res) => {
       where: {
         UserId: userId,
       },
-      include: User,
     });
 
     return res.json({
@@ -30,13 +29,19 @@ const getTaskForUser = async (req, res) => {
 
 const createTaskForUser = async (req, res) => {
   const userId = req.userId;
-  console.log(userId);
   const {description} = req.body;
+
+  if (!description) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'Description cannot be empty',
+    });
+  }
 
   try {
     const task = await Task.create({
       UserId: userId,
-      task_desc: description,
+      description: description,
       status: 'Not Completed',
     });
 
