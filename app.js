@@ -3,6 +3,7 @@ require('./models/associations');
 const express = require('express');
 const sequelize = require('./database');
 const logActivity = require('./middlewares/log-activity');
+const cookieParser = require('cookie-parser');
 const path = require('path');
 const indexRoute = require('./routes/index.route');
 const apiRoute = require('./routes/api.route');
@@ -16,6 +17,7 @@ app.set('view engine', 'ejs');
 app.use(logActivity);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
