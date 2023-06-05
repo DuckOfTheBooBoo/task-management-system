@@ -2,7 +2,7 @@ const {DataTypes} = require('sequelize');
 const sequelize = require('../database');
 
 const Task = sequelize.define('Task', {
-  task_id: {
+  id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
@@ -16,6 +16,11 @@ const Task = sequelize.define('Task', {
     type: DataTypes.STRING,
     allowNull: false,
     defaultValue: 'Not Completed',
+  },
+  tags: {
+    // eslint-disable-next-line new-cap
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: true,
   },
 });
 

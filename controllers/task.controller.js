@@ -65,7 +65,7 @@ const getTaskForUser = async (req, res) => {
 
 const createTaskForUser = async (req, res) => {
   const userId = req.userId;
-  const {description} = req.body;
+  const {description, tags} = req.body;
 
   if (!description) {
     return res.status(400).json({
@@ -75,11 +75,23 @@ const createTaskForUser = async (req, res) => {
   }
 
   try {
-    const task = await Task.create({
-      UserId: userId,
-      description: description,
-      status: 'Not Completed',
-    });
+
+    let task;
+
+    if (tags) {
+      task = await Task.create({
+        UserId: userId,
+        description: description,
+        status: 'Not Completed',
+        tags: tags,
+      });
+    } else {
+      task = await Task.create({
+        UserId: userId,
+        description: description,
+        status: 'Not Completed',
+      });
+    }
 
     console.log(task);
 
@@ -125,7 +137,7 @@ const updateTaskForUser = async (req, res) => {
       },
       {
         where: {
-          'task_id': taskId,
+          TaskId: taskId,
         },
       });
     } else {
@@ -135,7 +147,7 @@ const updateTaskForUser = async (req, res) => {
       },
       {
         where: {
-          'task_id': taskId,
+          TaskId: taskId,
         },
       });
     }
@@ -168,10 +180,9 @@ const deleteTaskForUser = async (req, res) => {
   }
 
   try {
-
     await Task.destroy({
       where: {
-        'task_id': taskId,
+        TaskId: taskId,
       },
     });
 
