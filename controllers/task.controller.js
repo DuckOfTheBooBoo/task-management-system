@@ -1,10 +1,46 @@
 const User = require('../models/user.model');
 const Task = require('../models/task.model');
 
+const STATUS_VALUES = ['Not Completed', 'Completed'];
+
 const getTaskForUser = async (req, res) => {
 
   const userId = req.userId;
+  const {status} = req.query;
 
+
+  // Return only the status
+  if (status) {
+    if (STATUS_VALUES.includes(status)) {
+      try {
+        const tasks = await Task.findAll({
+          where: {
+            UserId: userId,
+            status: status,
+          },
+        });
+
+        return res.json({
+          status: 'success',
+          message: 'Successfully retrieve tasks',
+          data: tasks,
+        });
+      } catch (err) {
+        console.error(err);
+        return res.status(500).json({
+          status: 'fail',
+          message: err.message,
+        });
+      }
+    } else {
+      return res.status(400).json({
+        status: 'fail',
+        message: `Invalid status value: ${status}`,
+      });
+    }
+  }
+
+  // Return all
   try {
     const tasks = await Task.findAll({
       where: {
@@ -67,7 +103,7 @@ const updateTaskForUser = async (req, res) => {
   const userId = req.userId;
   const {taskId, description, status} = req.body;
 
-  if (!taskId || !status || !description) {
+  if (!taskId || !status) {
     return res.status(400).json({
       status: 'fail',
       message: 'taskId or status cannot be empty.',
@@ -75,15 +111,27 @@ const updateTaskForUser = async (req, res) => {
   }
 
   try {
-    await Task.update({
-      description: description,
-      status: status,
-    },
-    {
-      where: {
-        'task_id': taskId,
+
+    if (!description) {
+      await Task.update({
+        status: status,
       },
-    });
+      {
+        where: {
+          'task_id': taskId,
+        },
+      });
+    } else {
+      await Task.update({
+        description: description,
+        status: status,
+      },
+      {
+        where: {
+          'task_id': taskId,
+        },
+      });
+    }
 
     return res.json({
       status: 'success',
