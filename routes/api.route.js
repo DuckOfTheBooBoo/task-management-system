@@ -10,6 +10,7 @@ const {
   deleteTaskForUser,
 } = require('../controllers/task.controller');
 const logoutUser = require('../controllers/logout.controller');
+const checkToken = require('../middlewares/checkToken.middleware');
 const router = express.Router();
 
 router.post('/auth/signup', registerUser);
@@ -18,7 +19,7 @@ router.post('/auth/logout', logoutUser);
 router.post('/verifyToken', verifyToken);
 
 router.route('/task')
-    .all(jwtAuthMiddleware)
+    .all(checkToken, jwtAuthMiddleware)
     .get(getTaskForUser)
     .post(createTaskForUser)
     .put(updateTaskForUser)
