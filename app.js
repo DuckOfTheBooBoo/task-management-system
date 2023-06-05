@@ -6,6 +6,8 @@ const logActivity = require('./middlewares/log-activity');
 const path = require('path');
 const indexRoute = require('./routes/index.route');
 const apiRoute = require('./routes/api.route');
+const RevokedToken = require('./models/revokedTokens.model');
+const cleanRevokedTokens = require('./utils/cleanRevokedToken');
 
 const app = express();
 const host = process.env.STATUS !== 'prod' ? '127.0.0.1' : '0.0.0.0';
@@ -38,6 +40,13 @@ sequelize.sync()
       throw err;
     });
 
+cleanRevokedTokens()
+    .then(() => {
+      {}
+    })
+    .catch((err) => {
+      throw err;
+    });
 
 app.listen(PORT, host, () => {
   console.log(`Server is running on port ${host}:${PORT}`);

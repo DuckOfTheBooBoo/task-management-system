@@ -9,14 +9,15 @@ const {
   updateTaskForUser,
   deleteTaskForUser,
 } = require('../controllers/task.controller');
+const logoutUser = require('../controllers/logout.controller');
 const router = express.Router();
 
 router.post('/auth/signup', registerUser);
 router.post('/auth/login', loginUser);
+router.post('/auth/logout', logoutUser);
 router.post('/verifyToken', verifyToken);
 
 router.route('/task')
-    // TODO: Add controller later
     .all(jwtAuthMiddleware)
     .get(getTaskForUser)
     .post(createTaskForUser)
