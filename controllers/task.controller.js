@@ -110,6 +110,13 @@ const updateTaskForUser = async (req, res) => {
     });
   }
 
+  if (!STATUS_VALUES.includes(status)) {
+    return res.status(400).json({
+      status: 'fail',
+      message: `Invalid status value: ${status}`,
+    });
+  }
+
   try {
 
     if (!description) {
