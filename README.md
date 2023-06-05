@@ -42,10 +42,30 @@
     "password": "password"
 }
 ```
+
+### Response
+
 ```json
 {
     "status": "success/fail",
     "message": "Successfully verified the credentials/?"
+}
+```
+
+---
+
+### Log Out
+- Method: POST
+- Endpoint: `/api/auth/login`
+- Headers:
+    - Authorization: Bearer ${token}
+
+#### Response
+
+```json
+{
+    "status": "success/?",
+    "message": "Successfully logged out"
 }
 ```
 
