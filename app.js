@@ -40,13 +40,8 @@ sequelize.sync()
       throw err;
     });
 
-cleanRevokedTokens()
-    .then(() => {
-      {}
-    })
-    .catch((err) => {
-      throw err;
-    });
+// Clean revoked tokens table for every 10 minutes
+setInterval(cleanRevokedTokens, 600000);
 
 app.listen(PORT, host, () => {
   console.log(`Server is running on port ${host}:${PORT}`);

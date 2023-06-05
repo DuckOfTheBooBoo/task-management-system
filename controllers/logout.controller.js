@@ -20,8 +20,6 @@ const logoutUser = async (req, res) => {
     try {
       await RevokedToken.create({
         token: token,
-        // Advance 1 minutes for retention time
-        // retention_timestamp: addMinute(new Date(), 30),
       });
 
       return res.json({

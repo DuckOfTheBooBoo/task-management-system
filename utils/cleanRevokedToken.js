@@ -20,7 +20,7 @@ const cleanRevokedTokens = async () => {
     };
     console.log(`Deleted ${affectedRows} rows of revoked tokens`);
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
