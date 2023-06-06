@@ -41,8 +41,32 @@ sequelize.sync()
     });
 
 // Clean revoked tokens table for every 10 minutes
-setInterval(cleanRevokedTokens, 600000);
+let intervalId;
+cleanRevokedTokens()
+    .then(() => {
+      intervalId = setInterval(cleanRevokedTokens, 600000);
+    })
+    .catch((err) => {
+      console.error('An error occured: ', err);
+    });
 
 app.listen(PORT, host, () => {
   console.log(`Server is running on port ${host}:${PORT}`);
+});
+
+process.on('SIGINT', async () => {
+  try {
+    console.log('\nReceived SIGINT signal');
+
+    clearInterval(intervalId);
+    console.log('Cleared the intervals');
+
+    await sequelize.close();
+    console.log('Sequelize connection closed');
+
+    process.exit(0);
+  } catch (err) {
+    console.error('An error occured: ', err);
+    process.exit(1);
+  }
 });
