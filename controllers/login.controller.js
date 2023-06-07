@@ -35,10 +35,15 @@ const loginUser = async (req, res, next) => {
         process.env.JWT_SECRET,
         {expiresIn: '30m'});
 
+    const cookieOptions = {
+      maxAge: 3600000, // 1 hour
+      signed: true,
+    };
+
+    res.cookie('jwtToken', token, cookieOptions);
     return res.json({
       status: 'success',
       message: 'Successfully verified the credentials.',
-      token: token,
     });
 
   } catch (err) {
