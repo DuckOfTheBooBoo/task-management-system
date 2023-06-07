@@ -2,6 +2,7 @@ require('dotenv').config();
 require('./models/associations');
 const express = require('express');
 const sequelize = require('./database');
+const cookieParser = require('cookie-parser');
 const logActivity = require('./middlewares/log-activity');
 const path = require('path');
 const indexRoute = require('./routes/index.route');
@@ -18,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(logActivity);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
