@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="../public/styles/login.css">
+    <link rel="stylesheet" type="text/css" href="../public/styles/login.css">
     <title>Task Management System</title>
 </head>
 <body>
@@ -19,7 +19,7 @@
                 <p>Password:</p>
                 <input id="form-password" class="form-input password" type="password" placeholder="Your password" name="password" required>
                 
-                <div class="password-warning" id="password-warning">
+                <!-- <div class="password-warning" id="password-warning">
                     <p>Password must contain:</p>
                     <ul>
                         <li>Consists of 5 characters</li>
@@ -27,7 +27,7 @@
                         <li>Lowercase letter</li>
                         <li>Number</li>
                     </ul>
-                </div>
+                </div> -->
 
                 <input type="submit" value="LOG IN" id="login-btn">
             </form>
@@ -38,7 +38,7 @@
                 <p>Don't have an account yet?</p>
                 <a href="/signup">Create an account</a>
             </div>
-
+            
         </div>
         
     </div>
@@ -46,6 +46,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script src="../public/scripts/login.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/login.js"></script>
 </body>
 </html>

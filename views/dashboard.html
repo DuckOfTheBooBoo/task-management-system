@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/styles/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Dashboard</title>
+</head>
+<body>
+
+    <div class="top-taskbar">
+        <div class="options">
+            
+        </div>
+
+        <div class="message">
+            <p>Logged in as </p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="top-heading">
+            <h1>Tasks</h1>
+        </div>
+
+        <div class="tasks">
+            <li>
+                <div class="task">
+                    <label><p>Task 1</p></label>
+                    <select name="status" id="status">
+                        <option value="Completed">Completed</option>
+                        <option value="Not Completed">Not Completed</option>
+                    </select>
+                </div>
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </div>
+    </div>
+
+    <script>
+        const welcomeHead = document.getElementById('welcome-heading');
+
+        
+        // const verifyToken = async () => {
+        //     const jwtToken = localStorage.getItem('jwtToken');
+        //     console.log(jwtToken);
+        //     if (jwtToken) {
+        //         try {
+        //             const response = await axios.post('/api/verifyToken', {}, {
+        //                 headers: {
+        //                     'Authorization': `Bearer ${jwtToken}`,
+        //                 }
+        //             });
+
+        //             if (response.statusText === 'OK') {
+        //                 axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
+        //             }
+        //         } catch (err) {
+        //             const responseData = err.response.data;
+        //             window.stop();
+        //             alert(responseData.message);
+        //             window.location.href = '/login';
+        //         }
+        //     } else  {
+        //         alert('No token. You need to login first.')
+        //         window.location.href = '/login';
+        //     }
+            
+        // }
+
+        // verifyToken();
+
+
+    </script>
+
+</body>
+</html>
