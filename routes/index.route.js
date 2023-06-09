@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const path = require('path');
+const jwtCookieCheck = require('../middlewares/jwtCookie.middleware');
 
-router.get('/', (req, res) => {
-  return res.render('index');
+router.get('/', jwtCookieCheck, (req, res) => {
+  if (req.jwtToken) {
+    return res.redirect('/dashboard');
+  }
+  return res.redirect('/login');
 });
 
 router.get('/signup', (req, res) => {
