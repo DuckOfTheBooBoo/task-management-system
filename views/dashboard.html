@@ -5,78 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/dashboard.css">
+    <link rel="stylesheet" href="../public/styles/toastr.min.css">
+    <script src="https://kit.fontawesome.com/38432ca5e6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
-
     <div class="top-taskbar">
-        <div class="options">
-            
+        <div class="message-container">
+            <p>Logged in as <span id="username">(USER PLACEHOLDER)</span></p>
         </div>
-
-        <div class="message">
-            <p>Logged in as </p>
+        <div class="logout-container">
+            <button id="logout-btn">LOG OUT</button>
         </div>
     </div>
 
     <div class="container">
         <div class="top-heading">
-            <h1>Tasks</h1>
+            <div class="task-header-container">
+                <h1 class="task-header">Tasks</h1>
+            </div>
+            <div class="add-task-btn">
+                <button id="new-btn">New Task<i class="fa-solid fa-plus"></i></button>
+            </div>
         </div>
+
+        <div class="separator"></div>
 
         <div class="tasks">
-            <li>
-                <div class="task">
-                    <label><p>Task 1</p></label>
-                    <select name="status" id="status">
-                        <option value="Completed">Completed</option>
-                        <option value="Not Completed">Not Completed</option>
-                    </select>
-                </div>
-            </li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <table>
+                <tr>
+                    <th>Description</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                </tr>
+                <tr class="row-task rounded">
+                    <td class="description">Buy groceries damnit</td>
+                    <td>June 8th 2023</td>
+                    <td>
+                        <select name="status-select" class="status-select">
+                            <option value="Not Completed">Not Completed</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="row-task">
+                    <td class="description">Buy groceries damnit</td>
+                    <td>June 8th 2023</td>
+                    <td>
+                        <select name="status-select" id="status-select" class="status-select">
+                            <option value="Not Completed">Not Completed</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="row-task">
+                    <td class="description">Buy groceries damnit</td>
+                    <td>June 8th 2023</td>
+                    <td>
+                        <select name="status-select" class="status-select">
+                            <option value="Not Completed">Not Completed</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="row-task">
+                    <td class="description">Buy groceries damnit</td>
+                    <td>June 8th 2023</td>
+                    <td>
+                        <select name="status-select" class="status-select">
+                            <option value="Not Completed">Not Completed</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr class="row-task">
+                    <td class="description">Buy groceries damnit</td>
+                    <td>June 8th 2023</td>
+                    <td>
+                        <select name="status-select" class="status-select">
+                            <option value="Not Completed">Not Completed</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
-
-    <script>
-        const welcomeHead = document.getElementById('welcome-heading');
-
-        
-        // const verifyToken = async () => {
-        //     const jwtToken = localStorage.getItem('jwtToken');
-        //     console.log(jwtToken);
-        //     if (jwtToken) {
-        //         try {
-        //             const response = await axios.post('/api/verifyToken', {}, {
-        //                 headers: {
-        //                     'Authorization': `Bearer ${jwtToken}`,
-        //                 }
-        //             });
-
-        //             if (response.statusText === 'OK') {
-        //                 axios.defaults.headers.common['Authorization'] = `Bearer ${jwtToken}`;
-        //             }
-        //         } catch (err) {
-        //             const responseData = err.response.data;
-        //             window.stop();
-        //             alert(responseData.message);
-        //             window.location.href = '/login';
-        //         }
-        //     } else  {
-        //         alert('No token. You need to login first.')
-        //         window.location.href = '/login';
-        //     }
-            
-        // }
-
-        // verifyToken();
-
-
-    </script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="../public/scripts/toastr.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/dashboard.js"></script>
 </body>
 </html>
