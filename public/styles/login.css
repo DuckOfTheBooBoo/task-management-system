@@ -129,3 +129,7 @@ body {
 .signup-container a {
     color: #382502;
 }
+
+.error {
+    color: red;
+}
