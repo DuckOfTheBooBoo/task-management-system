@@ -5,53 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../public/styles/signup.css">
     <title>Task Management System</title>
 </head>
 <body>
-    <form action="/api/auth/signup" method="post" id="signup-form">
-        Username:
-        <input type="text" placeholder="altaf" name="username" required>
-        Password:
-        <input type="password" placeholder="123" name="password" required>
-        <!-- Confirm Password:
-        <input type="password"> -->
-        <input type="submit" value="Sign Up">
-    </form>
+    <div class="container">
+        
+        <div class="form-container">
+            <h1>Sign Up</h1>
+            <form action="/api/auth/signup" id="signup-form">
+                <p>Username:</p>
+                <input id="username" class="form-input username" type="text" placeholder="Your username" name="username" required>
+                <p>Password:</p>
+                <input id="password" class="form-input password" type="password" placeholder="Your password" name="password" required>
+                <p>Confirm Password:</p>
+                <input id="confirmPassword" class="form-input password" type="password" placeholder="Type your password again" name="confirmPassword" required>
+                <input type="submit" value="CREATE NEW ACCOUNT" id="signup-btn">
+            </form>
 
-    <script>
-        const sumbmitForm = async (data) => {
-            try {
-                const response = await axios.post('/api/auth/signup', data);
-                
-                if (response.statusText === 'OK') {
+            <div class="separator"></div>
 
-                    alert('User created successfully');
-
-                    window.location.href = '/login';
-                } else {
-                    console.log(response);
-                }
-            } catch (err) {
-                const responseData = err.response.data;
-
-                alert(responseData.message);
-            }
-        };
-
-        const loginForm = document.getElementById('signup-form');
-
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const formData = new FormData(event.target);
-            const data = {};
-
-            for (const [key, val] of formData.entries()) {
-                data[key] = val;
-            }
-
-            sumbmitForm(data);
-        });
-    </script>
+            <div class="login-container">
+                <p>Already have an account?</p>
+                <a href="/login">Log in</a>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="../public/scripts/signup.js"></script>
 </body>
 </html>

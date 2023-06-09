@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #382502;
+    background-color: #FAD643;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 500px;
+    background-color: #FAD643;
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.form-container {
+    max-width: 300px;
+    border: 3px solid #805B10;
+    background-color: #FAD643;
+    border-radius: 10px;
+    padding: 20px 20px;
+    margin-top: 10px;
+}
+
+.form-container h1 {
+    text-align: center;
+}
+
+.form-container p {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.form-container {
+    margin: 0 auto;
+}
+
+.form-container p {
+    margin-bottom: 5px;
+}
+
+.form-input {
+    font-family: 'Roboto', sans-serif;
+    outline: none;
+    padding: 10px;
+    margin: 5px 0px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #805B10;
+    border-radius: 5px;
+    background-color: #805b1000;
+    color: #382502;
+    font-size: 17px;
+    transition: background-color 0.5s ease;
+}
+
+.form-input:hover {
+    background-color: #faeacb
+}
+
+.form-input:focus {
+    background-color: #faeacb;
+}
+
+.password-warning {
+    display: none;
+    border: 2px solid #805B10;
+    border-radius: 5px;
+    background-color: #805b1000;
+    margin: 5px 0;
+    padding: 10px 10px;
+    list-style-type: disc;
+    transition: all 0.5 ease;
+}
+
+.password-warning p {
+    margin: 0;
+    padding: 0;
+}
+
+.password-warning ul {
+    margin: 0;
+    padding: 0;
+    list-style-position: inside;
+}
+
+#signup-btn {
+    outline: none;
+    margin: 20px 0;
+    padding: 10px;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    border: 2px solid #805B10;
+    border-radius: 5px;
+    background-color: #805b1000;
+    font-weight: bold;
+    color: #382502;
+    font-size: 17px;
+    transition: background-color 0.5s ease;
+}
+
+#signup-btn:hover {
+    background-color: #faeacb;
+    cursor: pointer;
+}
+
+#signup-btn:focus {
+    background: #faeacb;
+    cursor: pointer;
+}
+
+.separator {
+    border-top: 2px solid #805B10;
+    border-radius: 10px;
+}
+
+.login-container{
+    text-align: center;
+}
+
+.login-container p {
+    text-align: center;
+}
+
+.login-container a {
+    color: #382502;
+}
+
+.error {
+    color: red;
+}
