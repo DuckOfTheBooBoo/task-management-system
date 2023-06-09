@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const jwtCookieCheck = require('../middlewares/jwtCookie.middleware');
+const verifyJwt = require('../middlewares/jwtVerify.middleware');
 
 router.get('/', jwtCookieCheck, (req, res) => {
   if (req.jwtToken) {
@@ -14,11 +15,14 @@ router.get('/signup', (req, res) => {
   return res.render('signup');
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', jwtCookieCheck, (req, res) => {
+  if (req.jwtToken) {
+    return res.redirect('/dashboard');
+  }
   return res.render('login');
 });
 
-router.get('/dashboard', (req, res) => {
+router.get('/dashboard', jwtCookieCheck, verifyJwt, (req, res) => {
   return res.render('dashboard');
 });
 
