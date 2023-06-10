@@ -28,7 +28,7 @@ const verifyJwt = async (req, res, next) => {
     // Verify token
     try {
       const decodedToken = jwt.verify(jwtToken, process.env.JWT_SECRET);
-      req.userId = decodedToken.userId;
+      req.userId = decodedToken.id;
       return next();
 
     } catch (err) {
