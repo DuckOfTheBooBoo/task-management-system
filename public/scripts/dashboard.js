@@ -16,6 +16,51 @@ $(function() {
     'hideMethod': 'fadeOut',
   };
 
+  const refreshTasks = async () => {
+    try {
+      const response = await axios.get('/api/task');
+      const data = response.data.data;
+
+      data.forEach((task) => {
+        const newRow = $('<tr>');
+        newRow.addClass('row-task');
+
+        const description = $('<td>').text(task.description);
+        description.addClass('description');
+
+        const dateCreated = $('<td>').text(task.createdAt);
+
+        const options = $('<td>');
+        const select = $('<select>').data('taskId', task.id);
+        select.addClass('status-select');
+
+        // eslint-disable-next-line max-len
+        const notCompleted = $('<option>').val('Not Completed').text('Not Completed');
+        const completed = $('<option>').val('Completed').text('Completed');
+
+        // Append notCompleted and completed to select
+        select.append(notCompleted);
+        select.append(completed);
+
+        // Append select to options
+        options.append(select);
+
+        // Append all the rest of <td>
+        newRow.append(description);
+        newRow.append(dateCreated);
+        newRow.append(options);
+
+        // Append <tr> to <table>
+        $('#table-tasks tbody').append(newRow);
+
+      });
+      $('.tasks').slideToggle();
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   // Show/hide task function
   $('.task-header').on('click', () => {
     $('.tasks').slideToggle();
@@ -63,5 +108,6 @@ $(function() {
     $('.add-task-dialog').css('display', 'none');
   });
 
+  refreshTasks();
 
 });
