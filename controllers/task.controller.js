@@ -8,7 +8,6 @@ const getTaskForUser = async (req, res) => {
   const userId = req.userId;
   const {status} = req.query;
 
-
   // Return only the status
   if (status) {
     if (STATUS_VALUES.includes(status)) {

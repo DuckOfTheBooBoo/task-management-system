@@ -11,6 +11,16 @@
     <title>Dashboard</title>
 </head>
 <body>
+    <div class="add-task-dialog">
+        <form action="" class="input-container" id="add-task-form">
+            <input type="text" name="description" id="descInput" placeholder="Description">
+            <div class="button-container">
+                <button type="button" id="cancel-add-btn">Cancel</button>
+                <button type="submit" id="confirm-add-btn">Add</button>
+            </div>
+        </form>
+    </div>
+
     <div class="top-taskbar">
         <div class="message-container">
             <p>Logged in as <span id="username">(USER PLACEHOLDER)</span></p>
@@ -33,7 +43,7 @@
         <div class="separator"></div>
 
         <div class="tasks">
-            <table>
+            <table id="table-tasks">
                 <tr>
                     <th>Description</th>
                     <th>Date Created</th>
@@ -91,12 +101,15 @@
                 </tr>
             </table>
         </div>
+
     </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="../public/scripts/toastr.min.js"></script>
+    <script src="../public/scripts/submitForm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script type="text/javascript" src="../public/scripts/dashboard.js"></script>
 </body>
 </html>

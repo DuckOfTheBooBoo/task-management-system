@@ -21,24 +21,46 @@ $(function() {
     $('.tasks').slideToggle();
   });
 
-  $('#new-btn').on('click', async () => {
-    const newTask = prompt('Description: ');
+  $('#new-btn').on('click', () => {
+    $('.add-task-dialog').css('display', 'flex');
+  });
 
-    if (newTask) {
-      try {
-        const response = await axios.post('/api/task', {
-          description: newTask,
-        });
+  $('#add-task-form').validate({
+    rules: {
+      descInput: {
+        required: true,
+        maxlength: 255,
+      },
+    },
+    messages: {
+      descInput: {
+        required: 'Description cannot be empty!',
+        maxlength: 'Description cannot be longer than 255',
+      },
+    },
+    submitHandler: (form) => {
+      const formData = new FormData(form);
+      const data = {};
 
-        if (response.statusText === 'OK') {
-          toastr.success(response.data.message);
-        }
-      } catch (err) {
-        console.error(err);
-        toastr.success(response.data.message);
+      for (const [key, val] of formData.entries()) {
+        data[key] = val;
       }
-    }
 
+      submitForm(data, '/api/task')
+          .then((response) => {
+            if (response) {
+              toastr.success(response.message, 'Success');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+            toastr.error('Failed', err.message);
+          });
+    },
+  });
+
+  $('#cancel-add-btn').on('click', () => {
+    $('.add-task-dialog').css('display', 'none');
   });
 
 
