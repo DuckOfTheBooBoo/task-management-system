@@ -56,6 +56,23 @@ $(function() {
       });
       $('.tasks').slideToggle();
 
+      // Add change event listener to every select element
+      $('.row-task select').on('change', function(event) {
+        const taskId = $(this).data('taskId');
+        const value = $(this).val();
+
+        axios.put('/api/task', {taskId: taskId, status: value})
+            .then((response) => {
+              const responseBody = response.data;
+              toastr.success('Success', responseBody.message);
+            })
+            .catch((error) => {
+              toastr.error('An error occured');
+              console.error(error);
+            });
+
+      });
+
     } catch (err) {
       console.error(err);
     }
