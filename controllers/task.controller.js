@@ -136,7 +136,7 @@ const updateTaskForUser = async (req, res) => {
       },
       {
         where: {
-          TaskId: taskId,
+          id: taskId,
         },
       });
     } else {
@@ -146,7 +146,7 @@ const updateTaskForUser = async (req, res) => {
       },
       {
         where: {
-          TaskId: taskId,
+          id: taskId,
         },
       });
     }
