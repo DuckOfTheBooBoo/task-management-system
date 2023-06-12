@@ -54,6 +54,7 @@ $(function() {
         $('#table-tasks tbody').append(newRow);
 
       });
+
       $('.tasks').slideToggle();
 
       // Add change event listener to every select element
@@ -74,6 +75,7 @@ $(function() {
       });
 
     } catch (err) {
+      toastr.error('An error occured.');
       console.error(err);
     }
   };
