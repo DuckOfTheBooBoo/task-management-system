@@ -123,6 +123,7 @@ body {
     height: 30px;
     color: white;
     background-color: black;
+    z-index: 100;
 }
 
 .message-container p {
