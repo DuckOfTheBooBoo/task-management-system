@@ -158,6 +158,12 @@ body {
     background-color: red;
 }
 
+#logout-btn:active {
+    transition: none;
+    cursor: pointer;
+    background-color: rgb(214, 0, 0);
+}
+
 .container {
     /* background-color: #f4d143; */
     padding: 20px;
@@ -187,7 +193,6 @@ body {
     position: relative;
 }
 
-/* TODO: Make this below the taskbar */
 .add-task-btn {
     position: absolute;
     float: right;
