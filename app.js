@@ -40,7 +40,7 @@ sequelize.sync()
     })
     .catch((err) => {
       console.error('Error initializing database: ', err.stack);
-      throw err;
+      // throw err;
     });
 
 // Clean revoked tokens table for every 10 minutes
