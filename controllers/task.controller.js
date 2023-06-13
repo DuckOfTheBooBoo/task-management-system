@@ -5,7 +5,7 @@ const STATUS_VALUES = ['Not Completed', 'Completed'];
 
 const getTaskForUser = async (req, res) => {
 
-  const userId = req.userId;
+  const {id: userId} = req.user;
   const {status} = req.query;
 
   // Return only the status
@@ -63,7 +63,7 @@ const getTaskForUser = async (req, res) => {
 };
 
 const createTaskForUser = async (req, res) => {
-  const userId = req.userId;
+  const {id: userId} = req.user;
   const {description, tags} = req.body;
 
   if (!description) {
@@ -111,7 +111,7 @@ const createTaskForUser = async (req, res) => {
 };
 
 const updateTaskForUser = async (req, res) => {
-  const userId = req.userId;
+  const {id: userId} = req.user;
   const {taskId, description, status} = req.body;
 
   if (!taskId || !status) {
@@ -167,8 +167,7 @@ const updateTaskForUser = async (req, res) => {
 };
 
 const deleteTaskForUser = async (req, res) => {
-
-  const userId = req.userId;
+  const {id: userId} = req.user;
   const {taskId} = req.body;
 
   if (!taskId) {
