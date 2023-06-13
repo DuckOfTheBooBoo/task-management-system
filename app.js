@@ -14,9 +14,9 @@ const app = express();
 const host = process.env.NODE_ENV !== 'prod' ? '127.0.0.1' : '0.0.0.0';
 const PORT = 8081;
 
-app.engine('html', require('ejs').renderFile);
+app.engine('ejs', require('ejs').renderFile);
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 app.use(logActivity);
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
