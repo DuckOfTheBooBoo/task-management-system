@@ -6,8 +6,6 @@ $(function() {
     try {
       const response = await axios.post(endpoint, data);
       if (response.statusText === 'OK') {
-        alert('You are logged in!');
-
         window.location.href = '/dashboard';
       } else {
         console.log(response);

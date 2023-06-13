@@ -268,3 +268,27 @@ th {
 select {
     cursor: pointer;
 }
+
+.delete-btn {
+    outline: none;
+    padding: 5px 10px;
+    background-color: white;
+    border: 1px solid #ba0202;
+    border-radius: 5px;
+    color: rgb(186, 2, 2);
+    font-size: 15px;
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover,
+.delete-btn:focus {
+    cursor: pointer;
+    background-color: #ba0202;
+    color: white;
+}
+
+.delete-btn:active {
+    transition: none;
+    background-color: red;
+    border-color: red;
+}

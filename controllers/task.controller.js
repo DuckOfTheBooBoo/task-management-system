@@ -180,7 +180,7 @@ const deleteTaskForUser = async (req, res) => {
   try {
     await Task.destroy({
       where: {
-        TaskId: taskId,
+        id: taskId,
       },
     });
 

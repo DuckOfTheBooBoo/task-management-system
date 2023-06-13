@@ -22,7 +22,7 @@ $(function() {
       const data = response.data.data;
 
       data.forEach((task) => {
-        const newRow = $('<tr>');
+        const newRow = $('<tr>').data('taskId', task.id);
         newRow.addClass('row-task');
 
         const description = $('<td>').text(task.description);
@@ -31,12 +31,18 @@ $(function() {
         const dateCreated = $('<td>').text(task.createdAt);
 
         const options = $('<td>');
-        const select = $('<select>').data('taskId', task.id);
+        const select = $('<select>');
         select.addClass('status-select');
 
         // eslint-disable-next-line max-len
         const notCompleted = $('<option>').val('Not Completed').text('Not Completed');
         const completed = $('<option>').val('Completed').text('Completed');
+
+        const action = $('<td>');
+        const deleteButton = $('<button>').addClass('delete-btn');
+        deleteButton.append($('<i>').addClass('fa-solid fa-trash fa-lg'));
+
+        action.append(deleteButton);
 
         // Append notCompleted and completed to select
         select.append(notCompleted);
@@ -49,6 +55,7 @@ $(function() {
         newRow.append(description);
         newRow.append(dateCreated);
         newRow.append(options);
+        newRow.append(action);
 
         // Append <tr> to <table>
         $('#table-tasks tbody').append(newRow);
@@ -59,7 +66,7 @@ $(function() {
 
       // Add change event listener to every select element
       $('.row-task select').on('change', function(event) {
-        const taskId = $(this).data('taskId');
+        const taskId = $(this).closest('tr').data('taskId');
         const value = $(this).val();
 
         axios.put('/api/task', {taskId: taskId, status: value})
@@ -72,6 +79,20 @@ $(function() {
               console.error(error);
             });
 
+      });
+
+      $('.delete-btn').on('click', function(event) {
+        const taskId = $(this).closest('tr').data('taskId');
+        axios.delete('/api/task', {data: {taskId: taskId}})
+            .then((response) => {
+              const responseBody = response.data;
+              toastr.success('Success', responseBody.message);
+              $(this).closest('tr').remove();
+            })
+            .catch((error) => {
+              toastr.error('An error occured');
+              console.error(error);
+            });
       });
 
     } catch (err) {
