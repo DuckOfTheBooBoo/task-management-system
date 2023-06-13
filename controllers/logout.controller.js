@@ -1,6 +1,4 @@
 require('dotenv').config();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const RevokedToken = require('../models/revokedTokens.model');
 const addMinute = require('../utils/addMinute');
 
