@@ -135,6 +135,7 @@ $(function() {
       axios.post('/api/auth/logout')
           .then((response) => {
             alert(response.data.message);
+            window.location.href = '/login';
           })
           .catch((err) => {
             toastr.error('An error occurred');
