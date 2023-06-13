@@ -15,7 +15,9 @@ router.get('/login', jwtCookieCheck, verifyJwt, (req, res) => {
 });
 
 router.get('/dashboard', jwtCookieCheck, verifyJwt, (req, res) => {
-  return res.render('dashboard');
+  return res.render('dashboard', {
+    username: req.user.username,
+  });
 });
 
 // Static file
