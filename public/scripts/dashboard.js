@@ -127,6 +127,22 @@ $(function() {
     $('.add-task-dialog').css('display', 'none');
   });
 
+  // Logout button
+  $('#logout-btn').on('click', function() {
+    const confirmDialog = confirm('Are you sure you want to log out?');
+
+    if (confirmDialog) {
+      axios.post('/api/auth/logout')
+          .then((response) => {
+            alert(response.data.message);
+          })
+          .catch((err) => {
+            toastr.error('An error occurred');
+            console.error(err);
+          });
+    }
+  });
+
   refreshTasks();
 
 });
