@@ -5,6 +5,7 @@ const sequelize = new Sequelize(config.DB_NAME, config.USER, config.PASS, {
   host: config.HOST,
   dialect: config.dialect,
   pool: config.pool,
+  logging: false,
 });
 
 module.exports = sequelize;
