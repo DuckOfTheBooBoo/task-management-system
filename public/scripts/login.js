@@ -1,33 +1,11 @@
 /* eslint-disable max-len */
 $(function() {
-  // Check if client have jwtToken in localStorage
-  // const verifyToken = async () => {
-  //   const jwtToken = localStorage.getItem('jwtToken');
-  //   console.log(jwtToken);
-  //   if (jwtToken) {
-  //     try {
-  //       const response = await axios.post('/api/verifyToken', {}, {
-  //         headers: {
-  //           'Authorization': `Bearer ${jwtToken}`,
-  //         },
-  //       });
-
-  //       if (response.statusText === 'OK') {
-  //         window.location.href = '/';
-  //       }
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   }
-  // };
 
   // Custom submit form post logic
-  const sumbmitForm = async (data) => {
+  const sumbmitForm = async (data, endpoint) => {
     try {
-      const response = await axios.post('/api/auth/login', data);
+      const response = await axios.post(endpoint, data);
       if (response.statusText === 'OK') {
-        const token = response.data.token;
-
         alert('You are logged in!');
 
         window.location.href = '/dashboard';
@@ -35,8 +13,9 @@ $(function() {
         console.log(response);
       }
     } catch (err) {
-      const responseData = err.response.data;
-      alert(responseData.message);
+      // const responseData = err.response.data;
+      // alert(responseData.message);
+      console.error(err);
     }
   };
 
@@ -51,7 +30,6 @@ $(function() {
     return /[0-9]/.test(value);
   });
 
-  // verifyToken();
 
   $('#login-form').validate({
     rules: {
@@ -79,14 +57,13 @@ $(function() {
       },
     },
     submitHandler: (form) => {
-      console.log('is awd');
       const formData = new FormData(form);
       const data = {};
 
       for (const [key, val] of formData.entries()) {
         data[key] = val;
       }
-      sumbmitForm(data);
+      sumbmitForm(data, '/api/auth/login');
     },
   });
 });
