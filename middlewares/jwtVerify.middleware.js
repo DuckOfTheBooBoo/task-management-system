@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable valid-jsdoc */
 const jwt = require('jsonwebtoken');
 const RevokedToken = require('../models/revokedTokens.model');
@@ -19,6 +20,13 @@ const verifyJwt = async (req, res, next) => {
     });
 
     if (result) {
+      if (req.headers['user-agent'].includes('Mozilla')) {
+        if (req.path !== '/login') {
+          return res.redirect('/login');
+        }
+        return next();
+      }
+
       return res.status(400).json({
         status: 'fail',
         message: 'Token is revoked.',
@@ -32,13 +40,27 @@ const verifyJwt = async (req, res, next) => {
       return next();
 
     } catch (err) {
+      if (req.headers['user-agent'].includes('Mozilla')) {
+        if (req.path !== '/login') {
+          return res.redirect('/login');
+        }
+        return next();
+      }
+
       return res.status(401).json({
         status: 'fail',
         message: 'Invalid or expired token.',
       });
     }
   } catch (err) {
-    console.error(err);
+    console.error('Token is undefined');
+    if (req.headers['user-agent'].includes('Mozilla')) {
+      if (req.path !== '/login') {
+        return res.redirect('/login');
+      }
+      return next();
+    }
+
     return res.status(500).json({
       status: 'fail',
       message: 'Server error',

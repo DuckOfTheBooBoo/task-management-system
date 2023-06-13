@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.post('/auth/signup', registerUser);
 router.post('/auth/login', loginUser);
-router.post('/auth/logout', logoutUser);
+router.post('/auth/logout', jwtCookieCheck, jwtAuthHeaderCheck, logoutUser);
 
 router.route('/task')
     .all(jwtCookieCheck, jwtAuthHeaderCheck, verifyJwt)
@@ -24,5 +24,6 @@ router.route('/task')
     .post(createTaskForUser)
     .put(updateTaskForUser)
     .delete(deleteTaskForUser);
+
 
 module.exports = router;

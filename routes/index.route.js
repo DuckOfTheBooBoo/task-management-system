@@ -4,21 +4,13 @@ const path = require('path');
 const jwtCookieCheck = require('../middlewares/jwtCookie.middleware');
 const verifyJwt = require('../middlewares/jwtVerify.middleware');
 
-router.get('/', jwtCookieCheck, (req, res) => {
-  if (req.jwtToken) {
-    return res.redirect('/dashboard');
-  }
-  return res.redirect('/login');
-});
+router.get('/', jwtCookieCheck, verifyJwt);
 
 router.get('/signup', (req, res) => {
   return res.render('signup');
 });
 
-router.get('/login', jwtCookieCheck, (req, res) => {
-  if (req.jwtToken) {
-    return res.redirect('/dashboard');
-  }
+router.get('/login', jwtCookieCheck, verifyJwt, (req, res) => {
   return res.render('login');
 });
 
