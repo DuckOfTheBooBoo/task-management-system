@@ -12,7 +12,7 @@ $(function() {
     'extendedTimeOut': '1000',
     'showEasing': 'swing',
     'hideEasing': 'linear',
-    'showMethod': 'fadeIn',$('body').append
+    'showMethod': 'fadeIn',
     'hideMethod': 'fadeOut',
   };
 
