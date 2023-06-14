@@ -1,0 +1,198 @@
+/* Custom Confirm Dialog */
+.custom-confirm-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(128, 128, 128, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
+}
+
+.confirm-dialog-container {
+    height: fit-content;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    width: 450px;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.confirm-dialog-container p {
+    text-align: center;
+}
+
+.confirm-dialog-button-container {
+    display: flex;
+    margin: 10px 0;
+    justify-content: center;
+    gap: 10px;
+}
+
+.confirm-dialog-button-container button {
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 10px;
+    width: 15%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    outline: none;
+}
+
+#yes-btn {
+    border: 1px solid rgb(0, 98, 255);
+    color: rgb(0, 98, 255);
+}
+
+#yes-btn:hover,
+#yes-btn:focus {
+    background-color: rgb(0, 98, 255);
+    color: white;
+}
+
+#yes-btn:active {
+    transition: none;
+    background-color: rgb(0, 68, 177);
+    border: 1px solid rgb(0, 68, 177);
+
+}
+
+#no-btn {
+    border: 1px solid rgb(230, 0, 0);
+    color: rgb(230, 0, 0);
+}
+
+#no-btn:hover,
+#no-btn:focus {
+    background-color: rgb(230, 0, 0);
+    color: white;
+}
+
+#no-btn:active {
+    transition: none;
+    background-color: rgb(196, 0, 0);
+    border: 1px solid rgb(196, 0, 0);
+
+}
+
+/* Custom Prompt Dialog */
+.custom-prompt-dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(128, 128, 128, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 9999;
+}
+
+.input-container {
+    height: fit-content;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-family: 'Roboto', sans-serif;
+    background-color: white;
+    width: 450px;
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 20px;
+}
+
+.input-container p {
+    display: block;
+    /* transition: display 0.5s ease; */
+    font-size: 15px;
+    font-weight: bold;
+    color: red;
+}
+
+#descInput {
+    transition: all 0.3s ease;
+    padding: 10px;
+    border: 1px solid gray;
+    border-radius: 15px;
+    font-family: inherit;
+    font-weight: 700;
+    width: 95%;
+    background-color: rgba(244, 244, 244, 0.841);
+    outline: none;
+}
+
+#descInput:hover {
+    background-color: white;
+}
+
+#descInput:focus {
+    background-color: white;
+}
+
+.prompt-dialog-button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+    gap: 10px;
+}
+
+.prompt-dialog-button-container button {
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    padding: 10px;
+    width: 15%;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+    outline: none;
+}
+
+#true-btn {
+    border: 1px solid rgb(0, 98, 255);
+    color: rgb(0, 98, 255);
+}
+
+#true-btn:hover,
+#true-btn:focus {
+    background-color: rgb(0, 98, 255);
+    color: white;
+}
+
+#true-btn:active {
+    transition: none;
+    background-color: rgb(0, 68, 177);
+    border: 1px solid rgb(0, 68, 177);
+
+}
+
+#false-btn {
+    border: 1px solid rgb(230, 0, 0);
+    color: rgb(230, 0, 0);
+}
+
+#false-btn:hover,
+#false-btn:focus {
+    background-color: rgb(230, 0, 0);
+    color: white;
+}
+
+#false-btn:active {
+    transition: none;
+    background-color: rgb(196, 0, 0);
+    border: 1px solid rgb(196, 0, 0);
+
+}

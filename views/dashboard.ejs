@@ -5,22 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../public/styles/dashboard.css">
+    <link rel="stylesheet" href="../public/styles/customDialog.css">
     <link rel="stylesheet" href="../public/styles/toastr.min.css">
     <script src="https://kit.fontawesome.com/38432ca5e6.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <title>Dashboard</title>
 </head>
 <body>
-    <div class="add-task-dialog">
-        <form action="" class="input-container" id="add-task-form">
-            <input type="text" name="description" id="descInput" placeholder="Description">
-            <div class="button-container">
-                <button type="button" id="cancel-add-btn">Cancel</button>
-                <button type="submit" id="confirm-add-btn">Add</button>
-            </div>
-        </form>
-    </div>
-
     <div class="top-taskbar">
         <div class="message-container">
             <p>Logged in as <span id="username"><%= username %></span></p>
@@ -61,6 +52,7 @@
     <script src="../public/scripts/toastr.min.js"></script>
     <script src="../public/scripts/submitForm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="../public/scripts/customDialogs.js"></script>
     <script type="text/javascript" src="../public/scripts/dashboard.js"></script>
 </body>
 </html>
