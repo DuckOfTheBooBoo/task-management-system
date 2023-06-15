@@ -17,7 +17,7 @@ $(function() {
   };
 
   const refreshTasks = async () => {
-    $('tbody').empty();
+    $('.row-task').remove();
     try {
       const response = await axios.get('/api/task');
       const data = response.data.data;
@@ -88,14 +88,25 @@ $(function() {
 
       });
 
-      // $('.update-btn').on('click', function(event) {
-      //   const parentTr = $(this).closest('tr');
-      //   const taskId = parentTr.data('taskId');
+      $('.update-btn').on('click', function(event) {
+        const parentTr = $(this).closest('tr');
+        const taskId = parentTr.data('taskId');
+        // eslint-disable-next-line max-len
+        const inputValue = $(this).closest('.row-task').find('.description').text();
+        // eslint-disable-next-line max-len
+        const currentStatus = $(this).closest('.row-task').find('.status-select').val();
 
-      //   $('#descInput').val();
-      //   $('#confirm-add-btn').
-
-      // });
+        // eslint-disable-next-line max-len
+        customPrompt('Description', 'Update', 'Cancel', inputValue, 'PUT', {taskId: taskId, status: currentStatus})
+            .then((result) => {
+              if (result) {
+                if ($('.tasks').css('display') !== 'none') {
+                  $('.tasks').slideToggle();
+                }
+                refreshTasks();
+              }
+            });
+      });
 
       $('.delete-btn').on('click', function(event) {
         const parentTr = $(this).closest('tr');
@@ -124,7 +135,7 @@ $(function() {
   });
 
   $('#new-btn').on('click', () => {
-    customPrompt('Description', 'Add', 'Cancel', 'description')
+    customPrompt('Description', 'Add', 'Cancel', '', 'POST')
         .then((result) => {
           if (result) {
             if ($('.tasks').css('display') !== 'none') {

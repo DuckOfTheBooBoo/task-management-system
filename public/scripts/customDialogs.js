@@ -34,7 +34,7 @@ const customConfirm = (message) => {
   });
 };
 
-const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
+const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputValue = '', method = '', dataParam = {}) => {
   const customPromptDialog = $('<div>').addClass('custom-prompt-dialog');
 
   const promptForm = $('<form>').addClass('input-container').attr({
@@ -45,9 +45,9 @@ const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
   const formInput = $('<input>').attr({
     'id': 'descInput',
     'type': 'text',
-    'name': inputName,
+    'name': 'description',
     'placeholder': placeholderMsg,
-  });
+  }).val(inputValue);
 
   const buttonContainer = $('<div>').addClass('prompt-dialog-button-container');
 
@@ -98,20 +98,24 @@ const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
         data[key] = val;
       }
 
-      $.post('/api/task', data)
-          .done(function(response) {
-            toastr.success(response.message);
-            customPromptDialog.remove();
-            resolve(true);
-          })
-          .fail(function(xhr, status, error) {
-            toastr.error(response.message);
-            console.error('Error: ', error);
-            console.error(status);
-            console.error(xhr);
-            customPromptDialog.remove();
-            resolve(false);
-          });
+      $.ajax({
+        url: '/api/task',
+        type: method,
+        data: {...data, ...dataParam},
+        success: function(response) {
+          toastr.success(response.message);
+          customPromptDialog.remove();
+          resolve(true);
+        },
+        error: function(xhr, status, error) {
+          toastr.error(response.message);
+          console.error('Error: ', error);
+          console.error(status);
+          console.error(xhr);
+          customPromptDialog.remove();
+          resolve(false);
+        },
+      });
     });
   });
 };
