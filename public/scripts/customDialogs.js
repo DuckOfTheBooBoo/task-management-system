@@ -37,7 +37,10 @@ const customConfirm = (message) => {
 const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
   const customPromptDialog = $('<div>').addClass('custom-prompt-dialog');
 
-  const promptForm = $('<form>').addClass('input-container').attr('id', 'custom-prompt-dialog-form');
+  const promptForm = $('<form>').addClass('input-container').attr({
+    'id': 'custom-prompt-dialog-form',
+    'action': '',
+  });
 
   const formInput = $('<input>').attr({
     'id': 'descInput',
@@ -68,6 +71,7 @@ const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
   $('#false-btn').on('click', function(event) {
     $('.custom-prompt-dialog').remove();
   });
+
   $('#custom-prompt-dialog-form').validate({
     rules: {
       descInput: {
@@ -81,25 +85,33 @@ const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputName) => {
         maxlength: 'Description cannot be longer than 255',
       },
     },
-    submitHandler: (form) => {
-      const formData = new FormData(form);
+  });
+
+  return new Promise((resolve) => {
+    $('#custom-prompt-dialog-form').on('submit', function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
       const data = {};
 
       for (const [key, val] of formData.entries()) {
         data[key] = val;
       }
 
-      submitForm(data, '/api/task')
-          .then((response) => {
-            if (response) {
-              toastr.success(response.message, 'Success');
-              $('.custom-prompt-dialog').remove();
-            }
+      $.post('/api/task', data)
+          .done(function(response) {
+            toastr.success(response.message);
+            customPromptDialog.remove();
+            resolve(true);
           })
-          .catch((err) => {
-            console.error(err);
-            toastr.error('Failed', err.message);
+          .fail(function(xhr, status, error) {
+            toastr.error(response.message);
+            console.error('Error: ', error);
+            console.error(status);
+            console.error(xhr);
+            customPromptDialog.remove();
+            resolve(false);
           });
-    },
+    });
   });
 };
