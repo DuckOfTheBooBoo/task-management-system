@@ -17,6 +17,7 @@ $(function() {
   };
 
   const refreshTasks = async () => {
+    $('tbody').empty();
     try {
       const response = await axios.get('/api/task');
       const data = response.data.data;
@@ -123,7 +124,15 @@ $(function() {
   });
 
   $('#new-btn').on('click', () => {
-    customPrompt('Description', 'Add', 'Cancel', 'description');
+    customPrompt('Description', 'Add', 'Cancel', 'description')
+        .then((result) => {
+          if (result) {
+            if ($('.tasks').css('display') !== 'none') {
+              $('.tasks').slideToggle();
+            }
+            refreshTasks();
+          }
+        });
   });
 
   // Logout button
