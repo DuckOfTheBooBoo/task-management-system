@@ -105,7 +105,7 @@ const customPrompt = (placeholderMsg, trueBtnVal, falseBtnVal, inputValue = '', 
         success: function(response) {
           toastr.success(response.message);
           customPromptDialog.remove();
-          resolve(true);
+          resolve(response);
         },
         error: function(xhr, status, error) {
           toastr.error(response.message);
