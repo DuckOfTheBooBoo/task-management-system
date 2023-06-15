@@ -12,6 +12,7 @@ $(function() {
         console.log(response);
       }
     } catch (err) {
+      console.error(err);
       const responseData = err.response.data;
       alert(responseData.message);
     }
@@ -27,12 +28,20 @@ $(function() {
   $.validator.addMethod('containsNumber', (value, element) => {
     return /[0-9]/.test(value);
   });
+  $.validator.addMethod('noWhitespace', (value, element) => {
+    return !/\s/.test(value);
+  });
+  $.validator.addMethod('noUppercase', (value, element) => {
+    return !/[A-Z]/.test(value);
+  });
 
   $('#signup-form').validate({
     rules: {
       username: {
         required: true,
         minlength: 5,
+        noUppercase: true,
+        noWhitespace: true,
       },
       password: {
         required: true,
@@ -49,6 +58,8 @@ $(function() {
       username: {
         required: 'Please enter your username',
         minlength: 'Username must consist of at least 5 characters',
+        noUppercase: 'Username must be in lowercase',
+        noWhitespace: 'Username must not contain space',
       },
       password: {
         required: 'Please enter your password',
@@ -61,14 +72,17 @@ $(function() {
         equalTo: 'Password do not match',
       },
     },
-    submitHandler: (form) => {
-      const formData = new FormData(form);
-      const data = {};
-
-      for (const [key, val] of formData.entries()) {
-        data[key] = val;
-      }
-      sumbmitForm(data);
-    },
   });
+
+  $('#signup-form').on('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const data = {};
+
+    for (const [key, val] of formData.entries()) {
+      data[key] = val;
+    }
+    sumbmitForm(data);
+  });
+
 });
