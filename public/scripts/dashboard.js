@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 $(function() {
   toastr.options = {
     'closeButton': true,
@@ -44,8 +45,12 @@ $(function() {
         const description = $('<td>').text(task.description);
         description.addClass('description');
 
-        const dateCreated = $('<td>').text(dateStringify(task.createdAt));
-        const dateUpdated = $('<td>').text(dateStringify(task.updatedAt));
+        const dateCreated = $('<td>')
+            .text(dateStringify(task.createdAt))
+            .addClass('date-created');
+        const dateUpdated = $('<td>')
+            .text(dateStringify(task.updatedAt))
+            .addClass('date-updated');
 
         const options = $('<td>');
         const select = $('<select>');
@@ -95,11 +100,14 @@ $(function() {
       $('.row-task select').on('change', function(event) {
         const taskId = $(this).closest('tr').data('taskId');
         const value = $(this).val();
+        const updatedDate = $(this).closest('.row-task').find('.date-updated');
 
         axios.put('/api/task', {taskId: taskId, status: value})
             .then((response) => {
               const responseBody = response.data;
-              toastr.success('Success', responseBody.message);
+              const date = responseBody.data[0].updatedAt;
+              updatedDate.text(dateStringify(date));
+              toastr.success(responseBody.message);
             })
             .catch((error) => {
               toastr.error('An error occured');
@@ -111,20 +119,16 @@ $(function() {
       $('.update-btn').on('click', function(event) {
         const parentTr = $(this).closest('tr');
         const taskId = parentTr.data('taskId');
-        // eslint-disable-next-line max-len
-        const inputValue = $(this).closest('.row-task').find('.description').text();
-        // eslint-disable-next-line max-len
+        const description = $(this).closest('.row-task').find('.description');
         const currentStatus = $(this).closest('.row-task').find('.status-select').val();
+        const updatedDate = $(this).closest('.row-task').find('.date-updated');
 
-        // eslint-disable-next-line max-len
-        customPrompt('Description', 'Update', 'Cancel', inputValue, 'PUT', {taskId: taskId, status: currentStatus})
-            .then((result) => {
-              if (result) {
-                if ($('.tasks').css('display') !== 'none') {
-                  $('.tasks').slideToggle();
-                }
-                refreshTasks();
-              }
+        customPrompt('Description', 'Update', 'Cancel', description.text(), 'PUT', {taskId: taskId, status: currentStatus})
+            .then((response) => {
+              const date = response.data[0].updatedAt;
+              const newDesc = response.data[0].description;
+              updatedDate.text(dateStringify(date));
+              description.text(newDesc);
             });
       });
 
