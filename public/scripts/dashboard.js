@@ -138,7 +138,7 @@ $(function() {
         axios.delete('/api/task', {data: {taskId: taskId}})
             .then((response) => {
               const responseBody = response.data;
-              toastr.success('Success', responseBody.message);
+              toastr.success(responseBody.message);
               parentTr.remove();
             })
             .catch((error) => {
