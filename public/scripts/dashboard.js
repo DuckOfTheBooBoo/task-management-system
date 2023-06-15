@@ -6,7 +6,6 @@ $(function() {
     'newestOnTop': true,
     'progressBar': false,
     'positionClass': 'toast-top-right',
-    'preventDuplicates': true,
     'showDuration': '300',
     'hideDuration': '1000',
     'timeOut': '5000',
