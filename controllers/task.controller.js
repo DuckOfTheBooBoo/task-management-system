@@ -130,30 +130,21 @@ const updateTaskForUser = async (req, res) => {
 
   try {
 
-    if (!description) {
-      await Task.update({
-        status: status,
+    const [_, updatedRows] = await Task.update({
+      description: description,
+      status: status,
+    },
+    {
+      where: {
+        id: taskId,
       },
-      {
-        where: {
-          id: taskId,
-        },
-      });
-    } else {
-      await Task.update({
-        description: description,
-        status: status,
-      },
-      {
-        where: {
-          id: taskId,
-        },
-      });
-    }
+      returning: true,
+    });
 
     return res.json({
       status: 'success',
       message: 'Task updated successfully',
+      data: updatedRows,
     });
 
   } catch (err) {
