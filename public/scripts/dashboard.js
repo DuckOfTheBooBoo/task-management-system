@@ -16,6 +16,19 @@ $(function() {
     'hideMethod': 'fadeOut',
   };
 
+  const dateStringify = (dateString) => {
+    const date = new Date(dateString);
+    const options = {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    return date.toLocaleDateString('en-US', options).replace('at', ' ');
+  };
+
   const refreshTasks = async () => {
     $('.row-task').remove();
     try {
@@ -31,8 +44,8 @@ $(function() {
         const description = $('<td>').text(task.description);
         description.addClass('description');
 
-        const dateCreated = $('<td>').text(task.createdAt);
-        const dateUpdated = $('<td>').text(task.updatedAt);
+        const dateCreated = $('<td>').text(dateStringify(task.createdAt));
+        const dateUpdated = $('<td>').text(dateStringify(task.updatedAt));
 
         const options = $('<td>');
         const select = $('<select>');
