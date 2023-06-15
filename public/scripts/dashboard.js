@@ -65,6 +65,19 @@ $(function() {
         action.append([deleteButton, updateButton]);
         // Append notCompleted and completed to select
         select.append([notCompleted, completed]);
+        // Select default value
+        switch (task.status) {
+          case 'Completed':
+            completed.prop('selected', true);
+            break;
+
+          case 'Not Completed':
+            notCompleted.prop('selected', true);
+
+          default:
+            break;
+        }
+
         // Append select to options
         options.append(select);
 
