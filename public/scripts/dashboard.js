@@ -32,6 +32,7 @@ $(function() {
         description.addClass('description');
 
         const dateCreated = $('<td>').text(task.createdAt);
+        const dateUpdated = $('<td>').text(task.updatedAt);
 
         const options = $('<td>');
         const select = $('<select>');
@@ -48,21 +49,14 @@ $(function() {
         const updateButton = $('<button>').addClass('update-btn');
         updateButton.append($('<i>').addClass('fa-solid fa-pen-to-square'));
 
-        action.append(deleteButton);
-        action.append(updateButton);
-
+        action.append([deleteButton, updateButton]);
         // Append notCompleted and completed to select
-        select.append(notCompleted);
-        select.append(completed);
-
+        select.append([notCompleted, completed]);
         // Append select to options
         options.append(select);
 
         // Append all the rest of <td>
-        newRow.append(description);
-        newRow.append(dateCreated);
-        newRow.append(options);
-        newRow.append(action);
+        newRow.append([description, dateCreated, dateUpdated, options, action]);
 
         // Append <tr> to <table>
         $('#table-tasks tbody').append(newRow);
