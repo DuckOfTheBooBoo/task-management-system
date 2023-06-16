@@ -20,12 +20,5 @@ router.get('/dashboard', jwtCookieCheck, verifyJwt, (req, res) => {
   });
 });
 
-// Static file
-// TODO: Probably unsecure, fix later
-router.get('/public/:dir/:file', (req, res) => {
-  const {dir, file} = req.params;
-
-  return res.sendFile(path.join(__dirname, '..', 'public', dir, file));
-});
 
 module.exports = router;
