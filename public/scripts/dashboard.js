@@ -46,10 +46,10 @@ $(function() {
 
         const dateCreated = $('<td>')
             .text(dateStringify(task.createdAt))
-            .addClass('date-created');
+            .addClass('dates date-created');
         const dateUpdated = $('<td>')
             .text(dateStringify(task.updatedAt))
-            .addClass('date-updated');
+            .addClass('dates date-updated');
 
         const options = $('<td>');
         const select = $('<select>');
