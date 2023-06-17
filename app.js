@@ -12,7 +12,7 @@ const cleanRevokedTokens = require('./utils/cleanRevokedToken');
 
 const app = express();
 const host = '0.0.0.0';
-const PORT = 8081;
+const PORT = 80;
 
 app.use('/public', express.static('public'));
 app.engine('ejs', require('ejs').renderFile);
