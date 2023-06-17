@@ -11,7 +11,7 @@ const RevokedToken = require('./models/revokedTokens.model');
 const cleanRevokedTokens = require('./utils/cleanRevokedToken');
 
 const app = express();
-const host = process.env.NODE_ENV !== 'prod' ? '127.0.0.1' : '0.0.0.0';
+const host = '0.0.0.0';
 const PORT = 8081;
 
 app.use('/public', express.static('public'));
