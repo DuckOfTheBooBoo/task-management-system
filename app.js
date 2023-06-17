@@ -25,6 +25,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
+console.log('ENV VAR: ', processe.env);
+
 sequelize.authenticate()
     .then(() => {
       console.log('Connection to database has ben established.');
