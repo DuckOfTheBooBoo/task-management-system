@@ -12,7 +12,7 @@ const cleanRevokedTokens = require('./utils/cleanRevokedToken');
 
 const app = express();
 const host = '0.0.0.0';
-const PORT = 8080;
+const PORT = 80;
 
 // Console color formatting
 const YELLOW = '\x1b[33m';
