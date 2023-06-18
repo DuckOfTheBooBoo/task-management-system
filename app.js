@@ -12,7 +12,12 @@ const cleanRevokedTokens = require('./utils/cleanRevokedToken');
 
 const app = express();
 const host = '0.0.0.0';
-const PORT = 80;
+const PORT = 8080;
+
+// Console color formatting
+const YELLOW = '\x1b[33m';
+const RESET = '\x1b[0m';
+const RED = '\x1b[31m';
 
 // Check if JWT_SECRET is null
 if (!process.env.JWT_SECRET) {
@@ -84,3 +89,23 @@ process.on('SIGINT', async () => {
     process.exit(1);
   }
 });
+
+// Show note message
+console.log(YELLOW, `
+---------------------------------------------------
+Please note: You may see error messages during the initial connection process. Don't worry! Sequelize is designed to handle such situations.
+If you encounter errors during the database connection, it could be because the database is currently booting up. In this case, Sequelize will automatically attempt to reconnect in the background.
+Once the database finishes booting up, Sequelize will establish a successful connection and any errors you see now should resolve themselves.
+So, please be patient and let Sequelize work its magic behind the scenes. If there are any persistent connection issues, we'll notify you.
+`);
+console.log(RED, `
+If you continue to experience issues and the website shows a database connection error after some time, there might be an error in the database connection setup.
+
+Please ensure that the necessary database credentials (database name, username, password, host, and port) are correctly configured. Double-check that the database server is running and accessible.
+
+If you are running the web app locally, make sure your local development environment is properly configured and the database server is up and running.
+
+Thank you for your patience, and we apologize for any inconvenience caused.
+---------------------------------------------------
+`);
+console.log(RESET);
