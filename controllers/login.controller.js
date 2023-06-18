@@ -35,7 +35,7 @@ const loginUser = async (req, res, next) => {
         {expiresIn: '30m'});
 
     const cookieOptions = {
-      maxAge: process.env.COOKIE_DUR, // 30 Minute
+      maxAge: 1800000, // 30 Minute
       signed: true,
     };
 
