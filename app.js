@@ -14,6 +14,18 @@ const app = express();
 const host = '0.0.0.0';
 const PORT = 80;
 
+// Check if JWT_SECRET is null
+if (!process.env.JWT_SECRET) {
+  console.log('No JWT_SECRET env variable provided. Generating a random secret');
+  process.env.JWT_SECRET = require('crypto').randomBytes(32).toString('hex');
+}
+
+// Check if COOKIE_SECRET is null
+if (!process.env.COOKIE_SECRET) {
+  console.log('No COOKIE_SECRET env variable provided. Generating a random secret');
+  process.env.COOKIE_SECRET = require('crypto').randomBytes(32).toString('hex');
+}
+
 app.use('/public', express.static('public'));
 app.engine('ejs', require('ejs').renderFile);
 app.set('views', path.join(__dirname, 'views'));
@@ -25,15 +37,12 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
-console.log('ENV VAR: ', processe.env);
-
 sequelize.authenticate()
     .then(() => {
       console.log('Connection to database has ben established.');
     })
     .catch((err) => {
       console.error('Unable to connect/auth to database: ', err.stack);
-      throw err;
     });
 
 // Sequelize Sync
@@ -43,7 +52,6 @@ sequelize.sync()
     })
     .catch((err) => {
       console.error('Error initializing database: ', err.stack);
-      // throw err;
     });
 
 // Clean revoked tokens table for every 10 minutes
