@@ -47,7 +47,7 @@ sequelize.authenticate()
       console.log('Connection to database has ben established.');
     })
     .catch((err) => {
-      console.error('Unable to connect/auth to database: ', err.stack);
+      console.error('Unable to connect/auth to database: ', err.message);
     });
 
 // Sequelize Sync
@@ -56,7 +56,7 @@ sequelize.sync()
       console.log('Database initialized successfully');
     })
     .catch((err) => {
-      console.error('Error initializing database: ', err.stack);
+      console.error('Error initializing database: ', err.message);
     });
 
 // Clean revoked tokens table for every 10 minutes
@@ -66,7 +66,7 @@ cleanRevokedTokens()
       intervalId = setInterval(cleanRevokedTokens, 600000);
     })
     .catch((err) => {
-      console.error('An error occured: ', err);
+      console.error('An error occured: ', err.message);
     });
 
 app.listen(PORT, host, () => {
