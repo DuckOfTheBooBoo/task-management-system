@@ -9,6 +9,7 @@ const indexRoute = require('./routes/index.route');
 const apiRoute = require('./routes/api.route');
 const RevokedToken = require('./models/revokedTokens.model');
 const cleanRevokedTokens = require('./utils/cleanRevokedToken');
+const authenticateWithRetry = require('./controllers/authenticate.controller');
 
 const app = express();
 const host = '0.0.0.0';
@@ -42,31 +43,27 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
-sequelize.authenticate()
+authenticateWithRetry()
     .then(() => {
-      console.log('Connection to database has ben established.');
+      sequelize.sync()
+          .then(() => {
+            console.log('Database initialized successfully');
+            // Clean revoked tokens table for every 10 minutes
+            let intervalId;
+            cleanRevokedTokens()
+                .then(() => {
+                  intervalId = setInterval(cleanRevokedTokens, 600000);
+                })
+                .catch((err) => {
+                  console.error('An error occured: ', err.message);
+                });
+          })
+          .catch((err) => {
+            console.error('Error initializing database: ', err.message);
+          });
     })
     .catch((err) => {
-      console.error('Unable to connect/auth to database: ', err.message);
-    });
-
-// Sequelize Sync
-sequelize.sync()
-    .then(() => {
-      console.log('Database initialized successfully');
-    })
-    .catch((err) => {
-      console.error('Error initializing database: ', err.message);
-    });
-
-// Clean revoked tokens table for every 10 minutes
-let intervalId;
-cleanRevokedTokens()
-    .then(() => {
-      intervalId = setInterval(cleanRevokedTokens, 600000);
-    })
-    .catch((err) => {
-      console.error('An error occured: ', err.message);
+      console.error(`Error while authenticating database: ${erro.message}`);
     });
 
 app.listen(PORT, host, () => {
