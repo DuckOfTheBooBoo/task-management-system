@@ -29,6 +29,7 @@ const registerUser = async (req, res, next) => {
       const data = user.dataValues;
       if (data.username === username) {
         return res.status(400).json({
+          status: 'fail',
           message: 'Username has been taken.',
         });
       }
@@ -44,7 +45,7 @@ const registerUser = async (req, res, next) => {
     });
 
     return res.status(200).json({
-      status: 'Success',
+      status: 'success',
       message: 'User successfully created.',
     });
   } catch (err) {
