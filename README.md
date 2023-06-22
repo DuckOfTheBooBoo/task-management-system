@@ -1,6 +1,17 @@
 # Task Management System
 
-## API SPECIFICATION
+## Installation
+
+### Docker
+
+---
+
+1. Download the [Dockerfile](https://raw.githubusercontent.com/DuckOfTheBooBoo/task-management-system/master/Dockerfile) and [docker-compose.yaml](https://raw.githubusercontent.com/DuckOfTheBooBoo/task-management-system/master/docker-compose.yaml)
+2. Execute  `docker compose up -d` (Docker compose plugin) or `docker-compose up -d` (docker compose standalone)
+3. Access the web using port 8080 or the port you've specified
+
+
+## Api Specification
 
 ---
 
