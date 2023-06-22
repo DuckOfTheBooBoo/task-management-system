@@ -1,9 +1,9 @@
 const db = require('../database');
 
-module.export = function authenticateWithRetry() {
+function authenticateWithRetry() {
   return new Promise( async (resolve, reject) => {
-    const maxRetries = process.env.DB_CON_MAX_RETRIES || 5;
-    const retryDelay = 2000;
+    const maxRetries = process.env.DB_CON_MAX_RETRIES || 20;
+    const retryDelay = 5000;
 
     let retries = 0;
     let authenticated = false;
@@ -31,3 +31,5 @@ module.export = function authenticateWithRetry() {
     }
   });
 };
+
+module.exports = authenticateWithRetry;
