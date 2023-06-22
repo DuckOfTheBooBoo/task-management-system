@@ -13,7 +13,7 @@ const authenticateWithRetry = require('./controllers/authenticate.controller');
 
 const app = express();
 const host = '0.0.0.0';
-const PORT = 80;
+const PORT = 8080;
 
 // Console color formatting
 const YELLOW = '\x1b[33m';
@@ -51,7 +51,6 @@ authenticateWithRetry()
           .then(() => {
             console.log('Database initialized successfully');
             // Clean revoked tokens table for every 10 minutes
-            let intervalId;
             cleanRevokedTokens()
                 .then(() => {
                   intervalId = setInterval(cleanRevokedTokens, 600000);
