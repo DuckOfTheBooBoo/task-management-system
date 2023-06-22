@@ -1,0 +1,20 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: user # change this
+      POSTGRES_PASSWORD: (some password) # change this
+      POSTGRES_DB: task_management_db
+      
+  backend: 
+    build: 
+      context: .
+    environment:
+      DB_USER: user # change this
+      DB_PASS: (some password) # change this
+      DB_HOST: db
+      DB_NAME: task_management_db
+    ports:
+      - 8080:80
+    
