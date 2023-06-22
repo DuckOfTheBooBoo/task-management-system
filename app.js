@@ -1,5 +1,6 @@
 require('dotenv').config();
 require('./models/associations');
+require('pretty-error').start();
 const express = require('express');
 const sequelize = require('./database');
 const cookieParser = require('cookie-parser');

@@ -25,7 +25,7 @@ const registerUser = async (req, res, next) => {
       attributes: ['username'],
     });
 
-    users.forEach((user) => {
+    for (const user of users) {
       const data = user.dataValues;
       if (data.username === username) {
         return res.status(400).json({
@@ -33,7 +33,7 @@ const registerUser = async (req, res, next) => {
           message: 'Username has been taken.',
         });
       }
-    });
+    }
 
     const hashedPass = await bcrypt.hash(
         password,
