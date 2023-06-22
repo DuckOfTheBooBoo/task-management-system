@@ -43,6 +43,8 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use('/', indexRoute);
 app.use('/api', apiRoute);
 
+let intervalId;
+
 authenticateWithRetry()
     .then(() => {
       sequelize.sync()
@@ -63,7 +65,7 @@ authenticateWithRetry()
           });
     })
     .catch((err) => {
-      console.error(`Error while authenticating database: ${erro.message}`);
+      console.error(`Error while authenticating database: ${err.message}`);
     });
 
 app.listen(PORT, host, () => {
