@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: (some password) # change this
       POSTGRES_DB: task_management_db
       
-  backend: 
+  server: 
     build: 
       context: .
     environment:
