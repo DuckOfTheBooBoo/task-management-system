@@ -147,3 +147,4 @@ nodemon.json
 diagrams/
 .env
 *.rest
+.vscode
